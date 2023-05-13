@@ -13,7 +13,7 @@ const { Recipe, Diet} = require('../db.js') //importamos los modelos
 
 // Definimos la función encargada de traer la información de la API
 const getApiInfo= async ()=>{
-    const response= await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`)
+    const response= await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
     const ApiInfo= await response.data.results.map((receta)=>{
 
         const { id, title, image, summary, healthScore, analyzedInstructions, diets}=receta // Desestructuramos los datos de cada receta
