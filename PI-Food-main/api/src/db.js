@@ -47,6 +47,7 @@ const { Recipe, Diet } = sequelize.models;
 
 
 
+
 // Aquí se podrcb cían definir las relaciones entre los modelos, como Recipe.hasMany(Ingredient)
 
 Recipe.belongsToMany(Diet, {through: 'RecipeDiet'});

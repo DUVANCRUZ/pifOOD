@@ -42,6 +42,11 @@ module.exports = (sequelize) => {
       // Definir la columna "steps"
       type: DataTypes.ARRAY(DataTypes.STRING), // Tipo de dato de la columna: array de cadenas de caracteres
       allowNull: false // No permitir valores nulos
+    },
+    createdByUser: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
     }
   }, {
     // Configuración adicional del modelo

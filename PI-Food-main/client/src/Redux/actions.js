@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 export const GET_RECIPES= "GET_RECIPES";
 export const FILTER_DIETS="FILTER_DIETS"
+export const FILTER_CREATED= "FILTER_CREATED"
 
 
 export const getRecipes=()=>{
@@ -17,6 +18,15 @@ export const filterDiets=(payload)=>{
     console.log(payload)
     return{
         type: FILTER_DIETS,
+        payload
+    }
+    
+}
+
+export const filterCreated= (payload)=>{
+    console.log(payload)
+    return{
+        type: FILTER_CREATED,
         payload
     }
     
