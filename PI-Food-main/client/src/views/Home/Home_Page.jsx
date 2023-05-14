@@ -1,17 +1,22 @@
 import CardsContainer from "../../components/CardsContainer/CardContainer";
 import { useEffect,  } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getRecipes } from "../../Redux/actions";
+import {getRecipes,filterDiets } from "../../Redux/actions";
 
 
 
 export default function Home() { 
-  
+  const recipes = useSelector((state) => state.recipes);
+
   const dispatch= useDispatch();
    
   useEffect(()=>{
     dispatch(getRecipes())
   }, [])
+
+  const handleFilterDiets=(event)=>{
+    dispatch(filterDiets (event.target.value))
+  }
 
   return (
     <div> 
@@ -31,7 +36,7 @@ export default function Home() {
                     <option value="created">Created</option>
                     <option value="api">From API</option>
                 </select>
-                <select >
+                <select onChange={event => handleFilterDiets(event)} >
                     <option value="All">All Diets</option>
                     <option value="gluten free">Gluten Free</option>
                     <option value="dairy free">Dairy Free</option>

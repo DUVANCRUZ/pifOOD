@@ -5,14 +5,18 @@ import PagNumber from "../PagNumber/PagNumber";
 
 export default function CardsContainer() {
   const recipes = useSelector((state) => state.recipes);
+  // se define el numero de la pagina
   const [currentPage, setCurrentPage] = useState(1);
+  //se define la cantidad de recetas por pagina
   const [recipesPage, setRecipesPage] = useState(9);
-
+//indice de la ultima receta
   const indexOfLastRecipe = currentPage * recipesPage;
+  //indice de la primera receta
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPage;
+  //se recorta el array para ver que recetas se van a mostrar
   const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
   console.log(currentRecipes)
-
+  //se define la variable var la cual setea el numetro de la pagina
   const pag = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
