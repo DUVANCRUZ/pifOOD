@@ -1,7 +1,7 @@
 import CardsContainer from "../../components/CardsContainer/CardContainer";
 import { useEffect,  } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getRecipes,filterDiets, filterCreated} from "../../Redux/actions";
+import {getRecipes,filterDiets, filterCreated, orderByHeath, orderByTitle} from "../../Redux/actions";
 
 
 
@@ -22,15 +22,23 @@ export default function Home() {
     dispatch(filterCreated (event.target.value))
   }
 
+  const handleOrderByTitle=(event)=>{
+    dispatch(orderByTitle(event.target.value))
+  }
+
+  const handleOrderByHealth=(event)=>{
+    dispatch(orderByHeath(event.target.value))
+  }
+
   return (
     <div> 
        <div className="filters">
-                <select>
+                <select onChange={event => handleOrderByTitle(event)}>
                     <option value="default">-</option>
                     <option value="asc">A - Z</option>
                     <option value="desc">Z - A</option>
                 </select>
-                <select >
+                <select onChange={event => handleOrderByHealth(event)}>
                     <option value="default">-</option>
                     <option value="Higher Score">Highest Score</option>
                     <option value="Lower Score">Lowest Score</option>
