@@ -1,18 +1,27 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
+
 
 export const GET_RECIPES= "GET_RECIPES";
 export const FILTER_DIETS="FILTER_DIETS";
 export const FILTER_CREATED= "FILTER_CREATED";
 export const ORDER_BY_TITLE= "ORDER_BY_TITLE";
 export const ORDER_BY_HEALTH= "ORDER_BY_HEALTH"
+export const GET_RECIPE_BY_NAME= "GET_RECIPE_BY_NAME"
 
 
 export const getRecipes=()=>{
     return async function(dispatch){
-        const recipesData= await axios.get("http://localhost:3001/recipes");
-        const recipes= recipesData.data;
-        dispatch({type: GET_RECIPES, payload: recipes})
+        try {
+            const recipesData= await axios.get("http://localhost:3001/recipes");
+            const recipes= recipesData.data;
+            dispatch({
+                type: GET_RECIPES, 
+                payload: recipes
+            })
+        } catch (error) {
+            console.log(error)
+        }
+       
     }
 }
 
@@ -52,3 +61,21 @@ export const orderByHeath= (payload)=>{
 
 }
 
+export const getRecipeByName= (name)=>{
+    console.log(name)
+    return async function(dispatch){
+        try {
+            const recipeData= await axios.get(`http://localhost:3001/recipes?name=${name}`)
+            const recipe= recipeData.data;
+            dispatch({
+                type: GET_RECIPE_BY_NAME, 
+                payload: recipe
+            })
+        } catch (error) {
+            console.log(error)
+        }
+       
+    }
+
+
+}

@@ -1,29 +1,40 @@
 import CardsContainer from "../../components/CardsContainer/CardContainer";
-import { useEffect,  } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch} from "react-redux";
 import {getRecipes,filterDiets, filterCreated, orderByHeath, orderByTitle} from "../../Redux/actions";
-
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 
 export default function Home() { 
-  const recipes = useSelector((state) => state.recipes);
 
   const dispatch= useDispatch();
-   
+  const [orderTitle, setOrderTitle]= useState(``);
+  const [orderHealth, setOrderHealth]= useState(``);
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(()=>{
     dispatch(getRecipes())
   }, [])
+  
 
   const handleFilterDiets=(event)=>{
     dispatch(filterDiets (event.target.value))
   }
 
   const handleFilterCreated=(event)=>{
-    dispatch(filterCreated (event.target.value))
+    event.preventDefault();
+    dispatch(filterCreated (event.target.value));
+    setCurrentPage(1);
+    setOrderTitle(`Order ${event.target.value}`)
+
   }
 
   const handleOrderByTitle=(event)=>{
-    dispatch(orderByTitle(event.target.value))
+    event.preventDefault();
+    dispatch(orderByTitle(event.target.value)); 
+    setCurrentPage(1);
+    setOrderHealth(`Order ${event.target.value}`)
+
   }
 
   const handleOrderByHealth=(event)=>{
@@ -32,6 +43,7 @@ export default function Home() {
 
   return (
     <div> 
+      <SearchBar/>
        <div className="filters">
                 <select onChange={event => handleOrderByTitle(event)}>
                     <option value="default">-</option>
@@ -60,9 +72,9 @@ export default function Home() {
                     <option value="fodmap friendly">Low Fodmap</option>
                     <option value="whole 30">Whole 30</option>
                 </select>
-                <button>Aplicar filtros</button>
+               
             </div>
-      <h1>Welcome to my Home Web Page</h1> 
+      
 
       <CardsContainer/>
     </div> 

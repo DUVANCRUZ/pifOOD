@@ -1,4 +1,4 @@
-import { GET_RECIPES, FILTER_DIETS, FILTER_CREATED, ORDER_BY_TITLE, ORDER_BY_HEALTH } from "./actions"
+import { GET_RECIPES, FILTER_DIETS, FILTER_CREATED, ORDER_BY_TITLE, ORDER_BY_HEALTH, GET_RECIPE_BY_NAME } from "./actions"
 
 const initialState= {
     recipes:[],
@@ -49,13 +49,13 @@ const rootReducer = (state= initialState, action)=>{
             let orderByTitle=[]
             if(  action.payload === "asc"){
                 orderByTitle=recipes3.sort((a, b)=>{
-                if(a.title>b.title) return 1
+                if(a.title> b.title) return 1
                 else return -1
                 } )
             } 
             else if( action.payload === "desc"){
                 orderByTitle=recipes3.sort((a, b)=>{
-                if(a.title<b.title) return 1
+                if(a.title< b.title) return 1
                 else return -1
                 } )
             }
@@ -82,7 +82,12 @@ const rootReducer = (state= initialState, action)=>{
                 ...state,
                 recipes: orderByHealth
             }
-
+        
+        case GET_RECIPE_BY_NAME:
+            return {
+                ...state,
+                recipes: action.payload
+            }
 
         default:
             return {...state}

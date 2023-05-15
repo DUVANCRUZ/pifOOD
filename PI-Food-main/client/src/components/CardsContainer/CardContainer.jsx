@@ -8,7 +8,7 @@ export default function CardsContainer() {
   // se define el numero de la pagina
   const [currentPage, setCurrentPage] = useState(1);
   //se define la cantidad de recetas por pagina
-  const [recipesPage, setRecipesPage] = useState(9);
+  const recipesPage=9
 //indice de la ultima receta
   const indexOfLastRecipe = currentPage * recipesPage;
   //indice de la primera receta

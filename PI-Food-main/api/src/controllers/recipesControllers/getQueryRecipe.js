@@ -14,8 +14,9 @@ const getQueryRecipe = async (req, res) => {
       if (!name) {
         res.status(200).json(allRecipes);
       } else {
-        const recipesFilter = allRecipes.filter(
-          (recipe) => recipe.title.toLowerCase() === name.toLowerCase()
+        const recipesFilter = allRecipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(name.toLowerCase())
+          
         );
         if (recipesFilter.length === 0) {
           throw new Error("No se encontro RECETA");
