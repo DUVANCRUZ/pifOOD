@@ -2,7 +2,7 @@ import CardsContainer from "../../components/CardsContainer/CardContainer";
 import { useEffect, useState } from "react";
 import { useDispatch} from "react-redux";
 import {getRecipes,filterDiets, filterCreated, orderByHeath, orderByTitle} from "../../Redux/actions";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import NavBar from "../../components/NavBar/NavBar";
 
 
 export default function Home() { 
@@ -43,7 +43,6 @@ export default function Home() {
 
   return (
     <div> 
-      <SearchBar/>
        <div className="filters">
                 <select onChange={event => handleOrderByTitle(event)}>
                     <option value="default">-</option>
