@@ -18,14 +18,13 @@ export default function Home() {
   
 
   const handleFilterDiets=(event)=>{
+    event.preventDefault();
     dispatch(filterDiets (event.target.value))
   }
 
   const handleFilterCreated=(event)=>{
     event.preventDefault();
     dispatch(filterCreated (event.target.value));
-    setCurrentPage(1);
-    setOrderTitle(`Order ${event.target.value}`)
 
   }
 
@@ -38,7 +37,10 @@ export default function Home() {
   }
 
   const handleOrderByHealth=(event)=>{
+    event.preventDefault();
     dispatch(orderByHeath(event.target.value))
+    setCurrentPage(1);
+    setOrderTitle(`Order ${event.target.value}`)
   }
 
   return (
