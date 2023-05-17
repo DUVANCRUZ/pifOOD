@@ -101,7 +101,7 @@ export const postRecipe=(payload)=>{
     return async function(dispatch){
         try {
             const recipe= await axios.post(`http://localhost:3001/recipes`, payload)
-            console.log(recipe)
+
             return recipe
         } catch (error) {
             console.log(error)

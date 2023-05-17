@@ -33,19 +33,26 @@ const getApiInfo= async ()=>{
 
 
 // Definimos la función encargada de traer la información de la base de datos
-const getDBInfo= async()=>{
-   
-    const result= await Recipe.findAll({ // Usamos el método findAll de Sequelize para obtener todas las recetas de la base de datos
+const getDBInfo = async () => {
+    const result = await Recipe.findAll({
         include: {
-            model: Diet, // Incluimos el modelo de Diet para obtener las dietas relacionadas con las recetas
-            attributes: ["name"], // Seleccionamos solo el atributo "name" de las dietas
+            model: Diet,
+            attributes: ["name"],
             through: {
-                diets:[] 
+                attributes: [] // Excluimos los atributos de la tabla intermedia
             }
         }
-    })
-    return result
-}
+    });
+
+    const recipes = result.map((recipe) => {
+        const recipeInfo = recipe.toJSON(); // Convertimos la receta a un objeto JSON
+        const dietNames = recipe.diets.map((diet) => diet.name); // Obtenemos los nombres de las dietas asociadas
+        recipeInfo.diets = dietNames; // Añadimos los nombres de las dietas al objeto de la receta
+        return recipeInfo; // Retornamos la receta con los nombres de las dietas
+    });
+
+    return recipes;
+};
 
 // Definimos la función que obtiene la información de la API y de la base de datos y las concatena
 const getAllRecipes= async ()=>{

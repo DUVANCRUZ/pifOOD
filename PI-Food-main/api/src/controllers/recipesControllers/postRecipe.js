@@ -12,14 +12,13 @@ const postRecipe=async (req, res)=>{
             image,
             summary,
             healthScore,
-            steps
+            steps,
         })
         const recipeDiet= await Diet.findAll({
             where: {
                 name: diets
             }
         })
-        console.log(recipeDiet)
         
         recipeCreated.addDiet(recipeDiet);
         res.status(200).json(recipeCreated)

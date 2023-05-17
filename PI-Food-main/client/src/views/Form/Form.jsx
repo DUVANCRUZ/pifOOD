@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { postRecipe, getDiets } from "../../Redux/actions";
-import validation from "./validation";
+import validation from "./validation.jsx";
 import { useDispatch, useSelector} from "react-redux";
 
 const Form = ()=>{
@@ -11,7 +11,7 @@ const Form = ()=>{
     title: "",
     summary: "",
     healthScore: 0,
-    steps: [],
+    steps: "",
     image: "",
     diets: []
   });
@@ -24,9 +24,9 @@ const Form = ()=>{
         title: "", 
         summary: "",
         healthScore: "",
-        steps:[],
+        steps:"",
         image: "",
-        diets: []
+        diets: ""
     })
 
 
@@ -36,20 +36,23 @@ const Form = ()=>{
             ...recipeData,
             [event.target.name] : event.target.value
         })
-        console.log(event.target.value)
-        /*setErrors(validation({
+        
+        setErrors(validation({
             ...recipeData,
             [event.target.name] : event.target.value
-        }))*/
+        }))
 
     }
 
-     const handleSelect=(event)=>{
-        setRecipeData({
-          ...recipeData,
-          diets: [...recipeData.diets, event.target.value]
-        })
+    const handleSelect = (event) => {
+      const selectedDiet = event.target.value;
+      if (!recipeData.diets.includes(selectedDiet)) {
+        setRecipeData((prevData) => ({
+          ...prevData,
+          diets: [...prevData.diets, selectedDiet]
+        }));
       }
+    };
 
     const handleSubmit=(event) =>{
         event.preventDefault();
@@ -67,7 +70,7 @@ const Form = ()=>{
         
     }
 
-    
+    const isFormValid = Object.values(errors).every(error => error === "");
    
     return(
 
@@ -110,7 +113,7 @@ const Form = ()=>{
                 name="image" 
                 onChange={(event) => handleInputChange(event)}  
                 value={recipeData.image} 
-                placeholder="Write the preparation steps of the recipe"/>
+                placeholder="Write the URL image"/>
             {errors.image && <p style={{color: "red"}} > {errors.image}</p>}
 
             <label htmlFor="steps">Steps:</label>
@@ -120,9 +123,11 @@ const Form = ()=>{
                 onChange={(event) => handleInputChange(event)}  
                 value={recipeData.steps} 
                 placeholder="Write the preparation steps of the recipe"/>
-            {errors.image && <p style={{color: "red"}} > {errors.image}</p>}
+            {errors.steps && <p style={{color: "red"}} > {errors.steps}</p>}
 
+            <label htmlFor="diets">Diets: </label>
             <select onChange={(event) => handleSelect(event)} >
+             
               {diets.map((diet) => {
                 return (<option value={diet.name} key={diet.name}>
                   {diet.name}
@@ -135,7 +140,7 @@ const Form = ()=>{
             </div>
            
 
-            <button type="submit">Create Recipe</button>
+            <button type="submit" disabled={!isFormValid}>Create Recipe</button>
 
           
 
