@@ -65,8 +65,21 @@ const getAllRecipes= async ()=>{
 //Esta funcion va a atraer las recetas por Id
 const getInfoId= async(idRecipe) =>{
    
-    const findRecipeApi= await axios(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=${API_KEY}`);    
-    if(findRecipeApi.data) return findRecipeApi.data;
+    const response= await axios.get(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=${API_KEY}`);    
+    if(response) {
+        const apiInfo= await response.data
+        const { id, title, image, summary, healthScore, analyzedInstructions, diets}= apiInfo
+        const result = {
+                id,
+                title,
+                image,
+                summary,
+                healthScore,
+                steps: analyzedInstructions[0].steps,
+                diets
+            }
+        return result
+    }
     else{
     const findIdDB= await Recipe.findByPk(idRecipe, { 
         include: {

@@ -8,7 +8,8 @@ export const ORDER_BY_TITLE= "ORDER_BY_TITLE";
 export const ORDER_BY_HEALTH= "ORDER_BY_HEALTH";
 export const GET_RECIPE_BY_NAME= "GET_RECIPE_BY_NAME";
 export const GET_DIETS = "GET_DIETS";
-export const POST_RECIPE = "POST_RECIPE"
+export const POST_RECIPE = "POST_RECIPE";
+export const GET_DETAILS= "GET_DETAILS"
 
 
 export const getRecipes=()=>{
@@ -85,7 +86,6 @@ export const getDiets=()=>{
         try {
             const dietsData= await axios.get(`http://localhost:3001/diets`)
             const diets= dietsData.data;
-            console.log(diets)
             dispatch({
                 type: GET_DIETS, 
                 payload: diets
@@ -110,6 +110,19 @@ export const postRecipe=(payload)=>{
     }
 }
         
-        
+export const getDetails=(id)=>{
+    return async function(dispatch){
+        try {
+            const detailData= await axios.get(`http://localhost:3001/recipes/${id}`)
+            dispatch({
+                type: GET_DETAILS, 
+                payload: detailData.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+       
+    }
+}    
        
 

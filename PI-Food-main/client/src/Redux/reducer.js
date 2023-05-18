@@ -1,9 +1,10 @@
-import { POST_RECIPE, GET_DIETS, GET_RECIPES, FILTER_DIETS, FILTER_CREATED, ORDER_BY_TITLE, ORDER_BY_HEALTH, GET_RECIPE_BY_NAME } from "./actions"
+import { GET_DETAILS, POST_RECIPE, GET_DIETS, GET_RECIPES, FILTER_DIETS, FILTER_CREATED, ORDER_BY_TITLE, ORDER_BY_HEALTH, GET_RECIPE_BY_NAME } from "./actions"
 
 const initialState= {
     recipes:[],
     allRecipes:[],
-    diets: []
+    diets: [],
+    detail: []
 }
 
 const rootReducer = (state= initialState, action)=>{
@@ -97,6 +98,11 @@ const rootReducer = (state= initialState, action)=>{
             return{
                 ...state,
                 diets: action.payload
+            }
+        case GET_DETAILS:
+            return {
+                ...state,
+                detail: action.payload
             }
         default:
             return {...state}
