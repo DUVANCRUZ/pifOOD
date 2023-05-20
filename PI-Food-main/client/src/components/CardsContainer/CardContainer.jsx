@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "../Card/Card";
 import { useSelector } from "react-redux";
 import PagNumber from "../PagNumber/PagNumber";
+import styles from "./CardContainer.module.css"
 
 export default function CardsContainer() {
   const recipes = useSelector((state) => state.recipes);
@@ -10,6 +11,7 @@ export default function CardsContainer() {
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
   const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
 
   const pag = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -35,7 +37,7 @@ export default function CardsContainer() {
           currentPage={currentPage}
         />
       </div>
-      <div>
+      <div className={styles.container}>
         {currentRecipes.map((recipe) => {
           const { id, title, image, healthScore, diets } = recipe;
           return (

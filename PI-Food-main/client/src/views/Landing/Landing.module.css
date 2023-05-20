@@ -1,20 +1,21 @@
-.container {
+.container{
+    color: white;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  
-  .button{
+}
+.button{
     background-color:rgb(76, 102, 102);
     color:white;
-    width: 50px;
+    width: 150px;
     height: 30px;
     align-self: flex-end;
     border-radius: 20%;
 }
-  
-  .active {
-    background-color: #333;
-    color: #fff;
-  }
-  
+.button:hover{
+    background-color: rgb(68, 82, 82);
+    width: 170px;
+    height: 40px;
+
+}

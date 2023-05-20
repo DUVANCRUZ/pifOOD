@@ -2,7 +2,7 @@ import CardsContainer from "../../components/CardsContainer/CardContainer";
 import { useEffect, useState } from "react";
 import { useDispatch} from "react-redux";
 import {getRecipes,filterDiets, filterCreated, orderByHeath, orderByTitle} from "../../Redux/actions";
-import NavBar from "../../components/NavBar/NavBar";
+import styles from "./Home_Page.module.css"
 
 
 export default function Home() { 
@@ -44,24 +44,24 @@ export default function Home() {
   }
 
   return (
-    <div> 
-       <div className="filters">
-                <select onChange={event => handleOrderByTitle(event)}>
-                    <option value="default">-</option>
+    <div className={styles.container}> 
+       <div className={styles.filters}>
+                <select className={styles.select} onChange={event => handleOrderByTitle(event)}>
+                    <option value="default">Alphabetical order</option>
                     <option value="asc">A - Z</option>
                     <option value="desc">Z - A</option>
                 </select>
-                <select onChange={event => handleOrderByHealth(event)}>
-                    <option value="default">-</option>
+                <select className={styles.select} onChange={event => handleOrderByHealth(event)}>
+                    <option value="default">Health Score</option>
                     <option value="Higher Score">Highest Score</option>
                     <option value="Lower Score">Lowest Score</option>
                 </select>
-                <select onChange={event => handleFilterCreated(event)}  >
+                <select className={styles.select} onChange={event => handleFilterCreated(event)}  >
                     <option value="All">All</option>
                     <option value="created">Created</option>
                     <option value="api">From API</option>
                 </select>
-                <select onChange={event => handleFilterDiets(event)} >
+                <select  className={styles.select} onChange={event => handleFilterDiets(event)} >
                     <option value="All">All Diets</option>
                     <option value="gluten free">Gluten Free</option>
                     <option value="dairy free">Dairy Free</option>
