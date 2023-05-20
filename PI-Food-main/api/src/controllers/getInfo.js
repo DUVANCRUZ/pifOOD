@@ -62,37 +62,72 @@ const getAllRecipes= async ()=>{
     return allInfo// Retornamos la información concatenada
 }
 
-//Esta funcion va a atraer las recetas por Id
-const getInfoId= async(idRecipe) =>{
-   
-    const response= await axios.get(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=${API_KEY}`);    
-    if(response) {
-        const apiInfo= await response.data
-        const { id, title, image, summary, healthScore, analyzedInstructions, diets}= apiInfo
+//Esta funcion va a atraer las recetas por Id de la API
+const getRecipeFromAPI = async (idRecipe) => {
+    try {
+      const response = await axios.get(
+        `https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=${API_KEY}`
+      );
+      if (response.status === 200) {
+        const apiInfo = response.data;
+        const { id, title, image, summary, healthScore, analyzedInstructions, diets } = apiInfo;
         const result = {
-                id,
-                title,
-                image,
-                summary,
-                healthScore,
-                steps: analyzedInstructions[0].steps,
-                diets
-            }
-        return result
+          id,
+          title,
+          image,
+          summary,
+          healthScore,
+          steps: analyzedInstructions[0].steps,
+          diets,
+        };
+        return result;
+      }
+    } catch (error) {
+      // Puedes manejar el error de la API aquí si es necesario
+      console.log("Error al obtener la receta de la API:", error);
     }
-    else{
-    const findIdDB= await Recipe.findByPk(idRecipe, { 
-        include: {
-            model: Diet,
-            attributes:["name"],
-            through: { diets: [] }
+  };
+
+//Esta funcion va a atraer las recetas por Id de la Base de datos
+const getRecipeFromDB = async (idRecipe) => {
+  try {
+    const findIdDB = await Recipe.findByPk(idRecipe, {
+      include: {
+        model: Diet,
+        attributes: ["name"],
+        through: { diets: [] },
+      },
+    });
+
+    // Extrae los nombres de las dietas en forma de matriz
+  
+    const diets = findIdDB.diets.map((diet) => diet.name);
+
+    return { ...findIdDB.toJSON(), diets };
+  } catch (error) {
+    console.log("Error al obtener la receta de la base de datos:", error);
+  }
+};
+
+
+//Esta funcion junta las dos anteriores
+  const getInfoId = async (idRecipe) => {
+    try {
+      const apiInfo = await getRecipeFromAPI(idRecipe);
+      if (apiInfo) {
+        return apiInfo;
+      } else {
+        const dbInfo = await getRecipeFromDB(idRecipe);
+        if (dbInfo) {
+          return dbInfo;
         }
-        });
-        
-        if(FindIdDb) return findIdDB
+      }
+    } catch (error) {
+      throw new Error("No se encontró esta receta");
     }
-    throw Error ("No se encontro esta receta")
-}
+  };
+  
+  
 
 //este funcion va traer todas las dietas
 const getAllDiets=async()=>{

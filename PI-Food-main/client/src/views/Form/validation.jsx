@@ -6,7 +6,6 @@ const validation = (recipeData) => {
     if (recipeData.healthScore > 100 || recipeData.healthScore < 0){
       errors.healthScore = "Recipe health score must be a value between 0 and 100";
     }
-    if (!recipeData.steps) errors.steps = "Recipe preparation steps are required";
     if (!recipeData.image) errors.image = "Recipe image is required";
     return errors;
   };

@@ -68,6 +68,12 @@ const formFunctions = () => {
         steps: stepsCopy,
       });
     }
+    if (ingredientIndex === undefined && stepIndex === undefined){
+      setRecipeData({
+        ...recipeData,
+        [name]: value
+      })
+    }
 
     setErrors(
       validation({
@@ -136,6 +142,9 @@ const formFunctions = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
+    console.log(recipeData)
+
     dispatch(postRecipe(recipeData));
     alert("Recipe created");
     setRecipeData({

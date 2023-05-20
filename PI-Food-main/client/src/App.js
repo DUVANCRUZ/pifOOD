@@ -1,6 +1,6 @@
 import React from 'react';
 import {  Route, Routes, useLocation } from "react-router-dom";
-import { Detail, Home, Landing, Form, Steps } from "./views/Index.js";
+import { Detail, Home, Landing, Form, Steps, NotFound } from "./views/Index.js";
 import NavBar from "./components/NavBar/NavBar";
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
         <Route path="/form" render={()=><Form/>}/>
         <Route  path="/home" render={()=><Home />} />     
         <Route  path="/steps/:id" render={()=><Steps />} />     
+        <Route path="*" render={()=><NotFound />} />
       </div>
    
   );

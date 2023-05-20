@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetails } from "../../Redux/actions";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Step from "../../components/Step/Step";
 
 export default function Steps() {
@@ -20,6 +20,12 @@ export default function Steps() {
         ))
       ) 
       }
+      <Link to={`/detail/${detail.id}`}>
+           <button className='btn'>Back to Recipe Detail</button>
+        </Link>
+      <Link to={`/home`}>
+           <button className='btn'>Back to Home</button>
+       </Link>
     </div>
   );
 }

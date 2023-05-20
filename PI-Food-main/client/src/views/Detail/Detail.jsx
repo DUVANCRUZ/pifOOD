@@ -10,7 +10,7 @@ export default function Detail(){
     await dispatch(getDetails(id));
   }, [dispatch]);
   const detail = useSelector(state => state.detail);
-  console.log(detail.title);
+  console.log(detail.diets);
 
   return(
     <div>
@@ -23,14 +23,22 @@ export default function Detail(){
             <summary>Summary:</summary>
             <p dangerouslySetInnerHTML={{ __html: detail.summary }}/>
           </details>
-          <p>Diets: {detail.diets}</p>
-          <p>Health Score: {detail.healthScore}</p>
+          <h3>Diets: </h3> 
+          {detail.diets && detail.diets.map((diet, index) => (
+          <p key={index}>{diet}</p>
+          )
+          )}
+          <h3>Health Score: </h3>
+          <p>{detail.healthScore}</p>
           <div>
         <Link to={`/steps/${detail.id}`}>
            <button className='btn'>View Recipe Steps</button>
         </Link>
+        <Link to={`/home`}>
+           <button className='btn'>Back to Home</button>
+        </Link>
         </div>
-          <p>g</p>
+         
           
         </div>
       )}
