@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { getDetails } from "../../Redux/actions";
 import { Link, useParams } from "react-router-dom";
+import styles from "./Detail.module.css"
+import img from "../../Img/detail.jpg"
 
 export default function Detail(){
   const dispatch = useDispatch();
@@ -13,12 +15,12 @@ export default function Detail(){
   console.log(detail.diets);
 
   return(
-    <div>
+    <div className={styles.container}>
       {detail && (
-        <div>
+        <div className={styles.detail}>
           <p>Id: {detail.id}</p>
           <h2>{detail.title}</h2>
-          <img src={detail.image} alt={detail.title}/>
+          <img className={styles.imgRecipe} src={detail.image} alt={detail.title}/>
           <details>
             <summary>Summary:</summary>
             <p dangerouslySetInnerHTML={{ __html: detail.summary }}/>
@@ -32,16 +34,17 @@ export default function Detail(){
           <p>{detail.healthScore}</p>
           <div>
         <Link to={`/steps/${detail.id}`}>
-           <button className='btn'>View Recipe Steps</button>
+           <button className={styles.button }>View Recipe Steps</button>
         </Link>
         <Link to={`/home`}>
-           <button className='btn'>Back to Home</button>
+           <button className={styles.button }>Back to Home</button>
         </Link>
         </div>
-         
           
         </div>
+
       )}
+      <img className={styles.img} src={img} />
     </div>
   );
 }

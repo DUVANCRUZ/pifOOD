@@ -1,0 +1,33 @@
+
+.input{
+    background-color:rgb(76, 102, 102);
+    color:white;
+    width: 140px;
+    height:30px;
+    border-radius: 20%;
+    margin-bottom: 9px;
+}
+.input:hover{
+    background-color: rgb(68, 82, 82);
+    width: 150px;
+    height: 40px;
+
+}
+.input::placeholder {
+    color: rgb(174, 202, 200);
+  }
+
+
+.button{
+    background-color:rgb(76, 102, 102);
+    color:white;
+    width: 150px;
+    height: 30px;
+    border-radius: 20%;
+}
+.button:hover{
+    background-color: rgb(68, 82, 82);
+    width: 170px;
+    height: 40px;
+
+}

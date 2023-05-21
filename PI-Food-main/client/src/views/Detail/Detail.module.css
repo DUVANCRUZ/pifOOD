@@ -1,15 +1,11 @@
 .container{
     color: white;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 25px
 }
-
-.img{
-    width: 230px;
-    position: relative;
+.detail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .button{
@@ -17,7 +13,6 @@
     color:white;
     width: 150px;
     height: 30px;
-    align-self: flex-end;
     border-radius: 20%;
 }
 .button:hover{
@@ -25,4 +20,11 @@
     width: 170px;
     height: 40px;
 
+}
+.img{
+    display: flex;
+}
+
+.imgRecipe{
+    width: 400px;
 }

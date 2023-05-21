@@ -1,9 +1,12 @@
 import React from "react";
+import styles from "./Step.module.css";
 
-export default function Step({ step }) {
+
+export default function Step({ step, index }) {
   return (
-    <div>
-      <h2>{step.step}</h2>
+    <div className={styles.container} >
+      <h2>Step # {index+1}</h2>
+      <h4>{step.step}</h4>
       <h4>Ingredients:</h4>
       {step.ingredients.map((ingredient, index) => (
         <p key={index}>{ingredient.name}</p>

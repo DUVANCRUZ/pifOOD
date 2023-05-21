@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+import styles from "./NavBar.module.css";
 
 
 class NavBar extends React.Component {
@@ -10,19 +11,19 @@ class NavBar extends React.Component {
 
     render(){
         return(
-            <div > 
+            <div className={styles.container} > 
                 
-                <div  >
-                <button >
+                <div className={styles.buttons}  >
                 <Link  to="/form">
+                <button className={styles.button} >
                 Create my Recipe
-                </Link>
                 </button>
-                <button >
+                </Link>
                 <Link to="/home">
+                <button className={styles.button}>
                 Home
-                </Link>
                 </button>
+                </Link>
                 </div>
                 
                 <SearchBar />

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getRecipeByName } from "../../Redux/actions";
+import styles from "./SearchBar.module.css"
 
 class SearchBar extends Component {
   constructor(props) {
@@ -34,13 +35,17 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div>
-        <input
+      <div className={styles.container}> 
+        <input 
+          className={styles.input}
           type="text"
           placeholder="Search Recipe..."
           onChange={(event) => this.handleInputChange(event)}
         />
-        <button type="submit" onClick={(event) => this.handleSearch(event)}>
+        <button 
+          className={styles.button} 
+          type="submit" 
+          onClick={(event) => this.handleSearch(event)}>
           Search
         </button>
       </div>

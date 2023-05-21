@@ -1,5 +1,7 @@
 import React from "react";
-import useRecipeForm from "./FormFunctions";
+import formFunctions from "./FormFunctions";
+import styles from "./Form.module.css"
+import img from "../../Img/create.jpg"
 
 const Form = () => {
   const {
@@ -14,15 +16,16 @@ const Form = () => {
     handleSelect,
     handleSubmit,
     isFormValid,
-  } = useRecipeForm();
+  } = formFunctions();
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <div className={styles.container}>
+    <form  onSubmit={handleSubmit}>
+      <div className={styles.form}>
         <h1>Create my recipe</h1>
 
         <label htmlFor="title">Title:</label>
-        <input
+        <input className={styles.input}
           type="text"
           name="title"
           onChange={(event) => handleInputChange(event)}
@@ -32,7 +35,7 @@ const Form = () => {
         {errors.title && <p style={{ color: "red" }}>{errors.title}</p>}
 
         <label htmlFor="summary">Summary:</label>
-        <input
+        <input className={styles.input}
           type="text"
           name="summary"
           onChange={(event) => handleInputChange(event)}
@@ -42,7 +45,7 @@ const Form = () => {
         {errors.summary && <p style={{ color: "red" }}>{errors.summary}</p>}
 
         <label htmlFor="healthScore">Health Score:</label>
-        <input
+        <input className={styles.input}
           type="number"
           name="healthScore"
           onChange={(event) => handleInputChange(event)}
@@ -54,7 +57,7 @@ const Form = () => {
         )}
 
         <label htmlFor="image">Image:</label>
-        <input
+        <input className={styles.input}
           type="text"
           name="image"
           onChange={(event) => handleInputChange(event)}
@@ -63,10 +66,12 @@ const Form = () => {
         />
         {errors.image && <p style={{ color: "red" }}>{errors.image}</p>}
 
+        <div className={styles.step}>
+          <label>Steps: </label>
         {recipeData.steps.map((step, stepIndex) => (
           <div key={stepIndex}>
             <label>Step {stepIndex + 1}:</label>
-            <input
+            <input className={styles.input}
               type="text"
               name={`step-${stepIndex}`}
               onChange={(event) => handleInputChange(event, stepIndex)}
@@ -75,18 +80,19 @@ const Form = () => {
             />
 
             <label>Time Minutes: </label>
-            <input
+            <input className={styles.input}
               type="text"
               name={`time-${stepIndex}`}
               onChange={(event) => handleInputChange(event, stepIndex)}
               value={step.length.number}
               placeholder={`Write the time for step ${stepIndex + 1}`}
             />
-
+            
+            
             {step.ingredients.map((ingredient, ingredientIndex) => (
               <div key={ingredientIndex}>
                 <label>Ingredient {ingredientIndex + 1}:</label>
-                <input
+                <input className={styles.input}
                   type="text"
                   name={`ingredient-${stepIndex}-${ingredientIndex}`}
                   onChange={(event) =>
@@ -97,7 +103,7 @@ const Form = () => {
                     ingredientIndex + 1
                   }`}
                 />
-                <button
+                <button className={styles.button}
                   type="button"
                   onClick={() => deleteIngredient(stepIndex, ingredientIndex)}
                 >
@@ -105,21 +111,23 @@ const Form = () => {
                 </button>
               </div>
             ))}
-            <button type="button" onClick={() => addIngredient(stepIndex)}>
+            <button  className={styles.button} type="button" onClick={() => addIngredient(stepIndex)}>
               Add Ingredient
             </button>
           </div>
         ))}
 
-        <button type="button" onClick={deleteSteps}>
+        <button  className={styles.button} type="button" onClick={deleteSteps}>
           Delete Step
         </button>
-        <button type="button" onClick={addSteps}>
+        <button  className={styles.button} type="button" onClick={addSteps}>
           Add steps
         </button>
+        </div>   
+        
 
         <label htmlFor="diets">Diets: </label>
-        <select onChange={handleSelect}>
+        <select  className={styles.select} onChange={handleSelect}>
           {diets.map((diet) => (
             <option value={diet.name} key={diet.name}>
               {diet.name}
@@ -130,12 +138,17 @@ const Form = () => {
           <li>{recipeData.diets.map((diet) => diet + ", ")}</li>
         </ul>
         {errors.diets && <p style={{ color: "red" }}>{errors.diets}</p>}
-      </div>
 
-      <button type="submit" disabled={!isFormValid}>
+        <button  className={styles.buttonSubmit} type="submit" disabled={!isFormValid}>
         Create Recipe
       </button>
+      </div>
+
+     
     </form>
+    <img className={styles.img} src={img}/>
+          
+     </div>
   );
 };
 

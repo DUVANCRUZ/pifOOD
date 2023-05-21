@@ -1,15 +1,14 @@
 .container{
-    color: white;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    font-size: 25px
+    
 }
-
-.img{
-    width: 230px;
-    position: relative;
+.buttons{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
 }
 
 .button{
@@ -17,12 +16,16 @@
     color:white;
     width: 150px;
     height: 30px;
-    align-self: flex-end;
     border-radius: 20%;
+    
 }
 .button:hover{
     background-color: rgb(68, 82, 82);
     width: 170px;
     height: 40px;
 
+}
+
+.img{
+    width:350px;
 }
