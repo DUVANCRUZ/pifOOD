@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postRecipe, getDiets } from "../../Redux/actions";
-import validation from "./validation.jsx";
+import { postRecipe, getDiets, getRecipes } from "../../Redux/actions";
+import validation from "./validation";
 
-const formFunctions = () => {
+const FormFunctions = () => {
   const dispatch = useDispatch();
+  const recipes = useSelector((state) => state.recipes);
   const diets = useSelector((state) => state.diets);
 
   const [recipeData, setRecipeData] = useState({
@@ -28,6 +29,8 @@ const formFunctions = () => {
 
   useEffect(() => {
     dispatch(getDiets());
+    dispatch(getRecipes())
+    
   }, []);
 
   const [errors, setErrors] = useState({
@@ -68,18 +71,21 @@ const formFunctions = () => {
         steps: stepsCopy,
       });
     }
-    if (ingredientIndex === undefined && stepIndex === undefined){
+    if (ingredientIndex === undefined && stepIndex === undefined) {
       setRecipeData({
         ...recipeData,
-        [name]: value
-      })
+        [name]: value,
+      });
     }
 
     setErrors(
-      validation({
-        ...recipeData,
-        [name]: value,
-      })
+      validation(
+        {
+          ...recipeData,
+          [name]: value,
+        },
+        recipes
+      )
     );
   };
 
@@ -142,8 +148,8 @@ const formFunctions = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    console.log(recipeData)
+
+    console.log(recipeData);
 
     dispatch(postRecipe(recipeData));
     alert("Recipe created");
@@ -157,7 +163,7 @@ const formFunctions = () => {
     });
   };
 
-  const isFormValid = Object.values(errors).every((error) => error === "");
+  const isFormValid = Object.values(errors).every((error) => error === "")
 
   return {
     recipeData,
@@ -174,4 +180,4 @@ const formFunctions = () => {
   };
 };
 
-export default formFunctions;
+export default FormFunctions;

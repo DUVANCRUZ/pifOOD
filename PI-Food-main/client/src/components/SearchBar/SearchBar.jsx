@@ -30,7 +30,7 @@ class SearchBar extends Component {
 
     // Despacha la acción "getRecipeByName" pasando el nombre como argumento
     this.props.getRecipeByName(name);
-    this.setState("")
+    
   }
 
   render() {

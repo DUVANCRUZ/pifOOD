@@ -1,5 +1,5 @@
 import React from "react";
-import formFunctions from "./FormFunctions";
+import FormFunctions from "./FormFunctions";
 import styles from "./Form.module.css"
 import img from "../../Img/create.jpg"
 
@@ -16,7 +16,7 @@ const Form = () => {
     handleSelect,
     handleSubmit,
     isFormValid,
-  } = formFunctions();
+  } = FormFunctions();
 
   return (
     <div className={styles.container}>
