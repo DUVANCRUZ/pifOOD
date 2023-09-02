@@ -18,7 +18,7 @@ export default function Detail(){
     <div className={styles.container}>
       {detail && (
         <div className={styles.detail}>
-          <p>Id: {detail.id}</p>
+
           <h2>{detail.title}</h2>
           <img className={styles.imgRecipe} src={detail.image} alt={detail.title}/>
           <details>

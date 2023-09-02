@@ -13,6 +13,7 @@ const postRecipe=async (req, res)=>{
             summary,
             healthScore,
             steps,
+            createdByUser: false
         })
         const recipeDiet= await Diet.findAll({
             where: {

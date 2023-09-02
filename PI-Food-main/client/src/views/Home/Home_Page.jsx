@@ -58,8 +58,8 @@ export default function Home() {
                 </select>
                 <select className={styles.select} onChange={event => handleFilterCreated(event)}  >
                     <option value="All">All</option>
-                    <option value="created">Created</option>
-                    <option value="api">From API</option>
+                    <option value="created">Recets API</option>
+                    <option value="api">My creations</option>
                 </select>
                 <select  className={styles.select} onChange={event => handleFilterDiets(event)} >
                     <option value="All">All Diets</option>

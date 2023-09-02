@@ -5,11 +5,16 @@ require('dotenv').config(); // Cargar las variables de entorno del archivo .env
 const { Sequelize } = require('sequelize'); // Importar el objeto Sequelize
 const fs = require('fs'); // Módulo de Node.js para trabajar con el sistema de archivos
 const path = require('path'); // Módulo de Node.js para trabajar con rutas de archivos
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env; // Obtener las variables de entorno
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env; // Obtener las variables de entorno
 
+
+console.log(DB_HOST)
+console.log(DB_USER)
+console.log(DB_PASSWORD)
+console.log(DB_NAME)
 // Crear una nueva instancia de Sequelize para conectarnos a la base de datos
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/PIFood`, 
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, 
   {
   
   logging: false, // Desactivar el logging de SQL queries

@@ -1,7 +1,8 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 110%
+    width: 100vw;
+    justify-content: center;
   }
   
   .select {
