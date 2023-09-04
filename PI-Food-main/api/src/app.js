@@ -17,7 +17,15 @@ server.use(bodyParser.json({ limit: '50mb' })); // Configuramos body-parser para
 server.use(cookieParser()); // Configuramos cookie-parser para manejar cookies
 server.use(morgan('dev')); // Configuramos morgan para hacer logs en modo "dev"
 server.use((req, res, next) => { // Creamos un middleware para agregar headers a las respuestas
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // Agregamos el header "Access-Control-Allow-Origin" con el valor "http://localhost:3000"
+  const allowedOrigins = ['http://localhost:3000', 'https://front-end-food.onrender.com', 'https://food1-qs8w.onrender.com'];
+
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  // Agregamos el header "Access-Control-Allow-Origin" con el valor "http://localhost:3000"
   res.header('Access-Control-Allow-Credentials', 'true'); // Agregamos el header "Access-Control-Allow-Credentials" con el valor "true"
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept'); // Agregamos el header "Access-Control-Allow-Headers" con los valores "Origin", "X-Requested-With", "Content-Type" y "Accept"
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE'); // Agregamos el header "Access-Control-Allow-Methods" con los métodos HTTP permitidos
